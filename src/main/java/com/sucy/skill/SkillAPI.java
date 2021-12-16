@@ -74,7 +74,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * <p>You can retrieve a reference to this through Bukkit the same way as any other plugin.</p>
  */
 public class SkillAPI extends JavaPlugin {
-    private static SkillAPI singleton;
+    public static SkillAPI singleton;
 
     private final HashMap<String, Skill>          skills  = new HashMap<>();
     private final HashMap<String, RPGClass>       classes = new HashMap<>();

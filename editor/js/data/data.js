@@ -66,6 +66,9 @@ function getBadPotions() {
 function getDyes() {
     return DYES;
 }
+function getGlowColors(){
+    return GLOW_COLORS;
+}
 
 const GOOD_POTIONS = [
     "Speed",
@@ -118,4 +121,22 @@ const DYES = [
     'RED',
     'WHITE',
     'YELLOW'
+];
+const GLOW_COLORS = ['BLACK',
+     'DARK_BLUE',
+     'DARK_GREEN',
+     'DARK_AQUA',
+     'DARK_RED',
+     'DARK_PURPLE',
+     'GOLD',
+     'GRAY',
+     'DARK_GRAY',
+     'BLUE',
+     'GREEN',
+     'AQUA',
+     'RED',
+     'PURPLE',
+     'YELLOW',
+     'WHITE',
+     'NONE'
 ];

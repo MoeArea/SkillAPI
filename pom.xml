@@ -142,8 +142,15 @@
         <dependency>
             <groupId>LibsDisguises</groupId>
             <artifactId>LibsDisguises</artifactId>
-            <version>10.0.19</version>
+            <version>10.0.26</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.InventivetalentDev</groupId>
+            <artifactId>GlowAPI</artifactId>
+            <version>1.4.6-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/GlowAPI_v1.4.6-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.clip</groupId>

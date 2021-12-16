@@ -291,5 +291,6 @@ public class ComponentRegistry {
         register(new WarpTargetMechanic());
         register(new WarpValueMechanic());
         register(new WolfMechanic());
+        register(new SetGlowMechanic());
     }
 }

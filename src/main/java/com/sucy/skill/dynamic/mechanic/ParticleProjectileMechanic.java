@@ -40,6 +40,7 @@ import com.sucy.skill.cast.IIndicator;
 import com.sucy.skill.cast.IndicatorType;
 import com.sucy.skill.cast.ProjectileIndicator;
 import com.sucy.skill.dynamic.TempEntity;
+import com.sucy.skill.dynamic.target.RememberTarget;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -66,6 +67,13 @@ public class ParticleProjectileMechanic extends MechanicComponent implements Pro
     private static final String UPWARD   = "upward";
     private static final String FORWARD  = "forward";
 
+    //Missile
+    private static final String MISSILE_TARGET = "missile_target";
+    private static final String MISSILE_THRESHOLD = "missile_threshold";
+    private static final String MISSILE_ANGLE = "missile_angle";
+    private static final String MISSILE_DELAY = "missile_delay";
+
+    //Effect
     private static final String USE_EFFECT = "use-effect";
     private static final String EFFECT_KEY = "effect-key";
 
@@ -144,6 +152,18 @@ public class ParticleProjectileMechanic extends MechanicComponent implements Pro
         copy.set(ParticleProjectile.SPEED, parseValues(caster, ParticleProjectile.SPEED, level, 1), 0);
         copy.set(ParticleHelper.PARTICLES_KEY, parseValues(caster, ParticleHelper.PARTICLES_KEY, level, 1), 0);
         copy.set(ParticleHelper.RADIUS_KEY, parseValues(caster, ParticleHelper.RADIUS_KEY, level, 0), 0);
+        final List<LivingEntity> missileTargets = RememberTarget.remember(caster, settings.getString(MISSILE_TARGET, "_none"));
+
+        LivingEntity missileTarget = null;
+        double missileThreshold = 0;
+        double missileAngle = 0;
+        double missileDelay = 0;
+        if(missileTargets.size() > 0) {
+            missileTarget = missileTargets.get(0);
+            missileThreshold = settings.getDouble(MISSILE_THRESHOLD);
+            missileAngle = settings.getDouble(MISSILE_ANGLE);
+            missileDelay = settings.getDouble(MISSILE_DELAY);
+        }
 
         // Fire from each target
         for (LivingEntity target : targets) {
@@ -154,7 +174,7 @@ public class ParticleProjectileMechanic extends MechanicComponent implements Pro
             if (spread.equals("rain")) {
                 double radius = parseValues(caster, RADIUS, level, 2.0);
                 double height = parseValues(caster, HEIGHT, level, 8.0);
-                list = ParticleProjectile.rain(caster, level, loc, copy, radius, height, amount, this);
+                list = ParticleProjectile.rain(caster, level, loc, copy, radius, height, amount, this, missileTarget, missileThreshold, missileAngle, missileDelay);
             } else {
                 Vector dir = target.getLocation().getDirection();
 
@@ -179,7 +199,7 @@ public class ParticleProjectileMechanic extends MechanicComponent implements Pro
                         copy,
                         angle,
                         amount,
-                        this
+                        this, missileTarget, missileThreshold, missileAngle, missileDelay
                 );
             }
 
